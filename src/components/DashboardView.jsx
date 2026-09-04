@@ -170,117 +170,56 @@ export const DashboardView = () => {
 
       </div>
 
-      {/* Main Tables Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        
-        {/* Outstanding Payments Table */}
-        <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="font-extrabold text-slate-900 dark:text-white text-base">Outstanding Payments</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Order balances pending collection</p>
-            </div>
-            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200">
-              ₹{(pendingPaymentsTotal || 0).toFixed(2)} Due
-            </span>
+      {/* Pending Dispatch Section */}
+      <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h3 className="font-extrabold text-slate-900 dark:text-white text-base">Pending Dispatch</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Orders queued for shipment & courier assignment</p>
           </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
-              <thead className="bg-slate-100 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200 dark:border-slate-800">
-                <tr>
-                  <th className="py-2.5 px-3">ORDER</th>
-                  <th className="py-2.5 px-3">CUSTOMER</th>
-                  <th className="py-2.5 px-3">STATUS</th>
-                  <th className="py-2.5 px-3">PAYMENT</th>
-                  <th className="py-2.5 px-3 text-right">TOTAL</th>
-                  <th className="py-2.5 px-3 text-right">DUE</th>
-                  <th className="py-2.5 px-3 text-center">ACTION</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60 font-medium">
-                {outstandingOrders.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-slate-100 dark:hover:bg-slate-800/30 transition-colors">
-                    <td className="py-3 px-3">
-                      <button 
-                        onClick={() => setOrderDetailsOrder(ord)}
-                        className="font-mono font-bold text-blue-600 dark:text-blue-400 hover:underline"
-                      >
-                        {ord.id}
-                      </button>
-                    </td>
-                    <td className="py-3 px-3 text-slate-900 dark:text-slate-200 font-bold">{ord.customerName}</td>
-                    <td className="py-3 px-3">{getStatusBadge(ord.status)}</td>
-                    <td className="py-3 px-3">{getPaymentBadge(ord.paymentStatus)}</td>
-                    <td className="py-3 px-3 text-right font-semibold text-slate-900 dark:text-slate-200">₹{ord.totalAmount.toFixed(2)}</td>
-                    <td className="py-3 px-3 text-right font-extrabold text-rose-600 dark:text-rose-400">₹{ord.dueAmount.toFixed(2)}</td>
-                    <td className="py-3 px-3 text-center">
-                      <button
-                        onClick={() => recordPayment(ord.id, ord.dueAmount)}
-                        className="bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-600/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/40 font-bold px-2 py-1 rounded text-[11px] transition-colors"
-                      >
-                        Pay Full
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-500/20 text-[#0062bd] dark:text-blue-300 border border-blue-200">
+            {pendingDispatchOrders.length} Orders
+          </span>
         </div>
 
-        {/* Pending Dispatch Table */}
-        <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h3 className="font-extrabold text-slate-900 dark:text-white text-base">Pending Dispatch</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Orders queued for shipment</p>
-            </div>
-            <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200">
-              {pendingDispatchOrders.length} Orders
-            </span>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
-              <thead className="bg-slate-100 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200 dark:border-slate-800">
-                <tr>
-                  <th className="py-2.5 px-3">ORDER</th>
-                  <th className="py-2.5 px-3">CUSTOMER</th>
-                  <th className="py-2.5 px-3">STATUS</th>
-                  <th className="py-2.5 px-3 text-right">TOTAL</th>
-                  <th className="py-2.5 px-3">CREATED</th>
-                  <th className="py-2.5 px-3 text-center">CONTROL</th>
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+            <thead className="bg-slate-100 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 font-bold uppercase text-[10px] tracking-wider border-b border-slate-200 dark:border-slate-800">
+              <tr>
+                <th className="py-2.5 px-3">ORDER</th>
+                <th className="py-2.5 px-3">CUSTOMER</th>
+                <th className="py-2.5 px-3">STATUS</th>
+                <th className="py-2.5 px-3 text-right">TOTAL</th>
+                <th className="py-2.5 px-3">CREATED</th>
+                <th className="py-2.5 px-3 text-center">CONTROL</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60 font-medium">
+              {pendingDispatchOrders.map((ord) => (
+                <tr key={ord.id} className="hover:bg-slate-100 dark:hover:bg-slate-800/30 transition-colors">
+                  <td className="py-3 px-3 font-mono font-bold text-[#0062bd] dark:text-blue-400">
+                    <button onClick={() => setOrderDetailsOrder(ord)} className="hover:underline cursor-pointer">
+                      {ord.id}
+                    </button>
+                  </td>
+                  <td className="py-3 px-3 text-slate-900 dark:text-slate-200 font-bold">{ord.customerName}</td>
+                  <td className="py-3 px-3">{getStatusBadge(ord.status)}</td>
+                  <td className="py-3 px-3 text-right font-semibold text-slate-900 dark:text-slate-200">₹{ord.totalAmount.toFixed(2)}</td>
+                  <td className="py-3 px-3 text-slate-500 text-[11px]">{ord.createdDate}</td>
+                  <td className="py-3 px-3 text-center">
+                    <button
+                      onClick={() => setOrderDetailsOrder(ord)}
+                      className="bg-blue-50 hover:bg-blue-100 dark:bg-blue-600/20 text-[#0062bd] dark:text-blue-300 border border-blue-200 dark:border-blue-500/40 px-2 py-1 rounded text-[11px] font-bold transition-colors flex items-center justify-center space-x-1 mx-auto cursor-pointer"
+                    >
+                      <Eye className="w-3 h-3" />
+                      <span>Inspect</span>
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200 dark:divide-slate-800/60 font-medium">
-                {pendingDispatchOrders.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-slate-100 dark:hover:bg-slate-800/30 transition-colors">
-                    <td className="py-3 px-3 font-mono font-bold text-blue-600 dark:text-blue-400">
-                      <button onClick={() => setOrderDetailsOrder(ord)} className="hover:underline">
-                        {ord.id}
-                      </button>
-                    </td>
-                    <td className="py-3 px-3 text-slate-900 dark:text-slate-200 font-bold">{ord.customerName}</td>
-                    <td className="py-3 px-3">{getStatusBadge(ord.status)}</td>
-                    <td className="py-3 px-3 text-right font-semibold text-slate-900 dark:text-slate-200">₹{ord.totalAmount.toFixed(2)}</td>
-                    <td className="py-3 px-3 text-slate-500 text-[11px]">{ord.createdDate}</td>
-                    <td className="py-3 px-3 text-center">
-                      <button
-                        onClick={() => setOrderDetailsOrder(ord)}
-                        className="bg-blue-50 hover:bg-blue-100 dark:bg-blue-600/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/40 px-2 py-1 rounded text-[11px] font-bold transition-colors flex items-center justify-center space-x-1 mx-auto"
-                      >
-                        <Eye className="w-3 h-3" />
-                        <span>Inspect</span>
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
-
       </div>
 
       {/* Recent Orders Section */}
