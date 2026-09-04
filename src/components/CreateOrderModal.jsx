@@ -82,27 +82,39 @@ export const CreateOrderModal = () => {
     setSelectedItems(prev => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const totalAmount = calculateTotal();
-    addOrder({
-      source,
-      priority,
-      customerName,
-      customerEmail,
-      customerPhone,
-      shippingAddress,
-      gstin,
-      paymentStatus,
-      totalAmount,
-      items: selectedItems.map(item => ({
-        sku: item.sku || 'SRK-GENERIC',
-        name: item.name || 'Industrial Item',
-        qty: Number(item.qty) || 1,
-        unitPrice: Number(item.unitPrice) || 0,
-        subtotal: (Number(item.qty) || 1) * (Number(item.unitPrice) || 0)
-      }))
-    });
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    try {
+      const totalAmount = calculateTotal();
+      await addOrder({
+        source,
+        priority,
+        customerName: (customerName || '').trim() || 'Direct Customer',
+        customerEmail: (customerEmail || '').trim() || 'client@corporate.com',
+        customerPhone: (customerPhone || '').trim() || '+91 98000 00000',
+        shippingAddress: (shippingAddress || '').trim() || 'Delivery Address',
+        gstin: (gstin || '').trim(),
+        paymentStatus,
+        totalAmount,
+        items: selectedItems.map(item => ({
+          sku: item.sku || 'SRK-ITEM',
+          name: (item.name || '').trim() || 'Industrial Hardware',
+          qty: Math.max(1, Number(item.qty) || 1),
+          unitPrice: Math.max(0, Number(item.unitPrice) || 0),
+          subtotal: Math.max(1, Number(item.qty) || 1) * Math.max(0, Number(item.unitPrice) || 0)
+        }))
+      });
+      setCreateOrderOpen(false);
+    } catch (err) {
+      console.error("Order creation error:", err);
+      setCreateOrderOpen(false);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -213,8 +225,7 @@ export const CreateOrderModal = () => {
             <div>
               <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1">Customer Email</label>
               <input
-                type="email"
-                required
+                type="text"
                 value={customerEmail}
                 onChange={(e) => setCustomerEmail(e.target.value)}
                 className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
@@ -371,9 +382,17 @@ export const CreateOrderModal = () => {
               </button>
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs shadow-md shadow-blue-500/25 transition-colors"
+                disabled={isSubmitting}
+                className="bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold px-6 py-2.5 rounded-xl text-xs shadow-md shadow-blue-500/25 transition-colors flex items-center space-x-2"
               >
-                Book & Run Auto Stock Check
+                {isSubmitting ? (
+                  <>
+                    <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block"></span>
+                    <span>Booking Order...</span>
+                  </>
+                ) : (
+                  <span>Book & Run Auto Stock Check</span>
+                )}
               </button>
             </div>
           </div>
