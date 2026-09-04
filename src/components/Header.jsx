@@ -3,22 +3,12 @@ import { useApp } from '../context/AppContext';
 import { 
   Search, 
   Plus, 
-  Bell, 
   ExternalLink, 
   ShieldCheck, 
   RefreshCw, 
   Sun, 
   Moon, 
-  Wifi, 
-  Menu, 
-  ChevronDown, 
-  Phone, 
-  Mail,
-  Tag,
-  Radio,
-  ScanBarcode,
-  Printer,
-  Home
+  Wifi
 } from 'lucide-react';
 
 export const Header = () => {
@@ -30,12 +20,10 @@ export const Header = () => {
     activeTab, 
     activeRole, 
     setActiveRole,
-    delayedOrdersCount,
     ingestShopifyWebhookOrder
   } = useApp();
 
   const [theme, setTheme] = useState('light');
-  const [showCategoryMenu, setShowCategoryMenu] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -64,53 +52,8 @@ export const Header = () => {
     });
   };
 
-  const categories = [
-    { label: "Home", tab: "dashboard", icon: Home, query: "" },
-    { label: "RFID Tags", tab: "orders", icon: Tag, query: "RFID" },
-    { label: "RFID Reader", tab: "orders", icon: Radio, query: "Reader" },
-    { label: "Barcode Scanner", tab: "orders", icon: ScanBarcode, query: "Scanner" },
-    { label: "Label printer", tab: "orders", icon: Printer, query: "Printer" },
-  ];
-
-  const handleCategoryClick = (cat) => {
-    setActiveTab(cat.tab);
-    if (cat.query) {
-      setSearchQuery(cat.query);
-    } else {
-      setSearchQuery('');
-    }
-    setShowCategoryMenu(false);
-  };
-
   return (
-    <div className="sticky top-0 z-40 flex flex-col shadow-sm">
-      {/* 1. TOP ANNOUNCEMENT STRIP (Black bar matching www.srkinnovations.com) */}
-      <div className="bg-[#0b1120] text-slate-200 text-[11px] font-medium py-1.5 px-4 overflow-hidden border-b border-slate-800">
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center space-x-2 truncate">
-            <span className="text-amber-400">★</span>
-            <span className="text-slate-300 hidden sm:inline">SRK Innovations deals only through authorized email IDs & official numbers.</span>
-            <span className="text-amber-400">★</span>
-            <span className="text-white font-semibold">Free Shipping on orders above ₹5,999 with code <span className="text-amber-300 underline font-mono">FREESHIPPING</span></span>
-            <span className="text-amber-400 hidden md:inline">★</span>
-            <span className="text-slate-400 hidden lg:inline">🔒 Official SRK ERP & Dispatch Gate</span>
-          </div>
-
-          <div className="hidden sm:flex items-center space-x-4 shrink-0 text-slate-300 font-mono text-[11px]">
-            <a href="tel:+918411958300" className="hover:text-white flex items-center space-x-1">
-              <Phone className="w-3 h-3 text-amber-400" />
-              <span>+91 8411958300</span>
-            </a>
-            <a href="mailto:info@srkinnovations.com" className="hover:text-white flex items-center space-x-1">
-              <Mail className="w-3 h-3 text-amber-400" />
-              <span>info@srkinnovations.com</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. MAIN HEADER (Logo, Search Box with Cobalt Blue Button, Action Buttons) */}
-      <header className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 lg:px-8 py-2.5 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
+    <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 lg:px-8 py-3 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 shadow-sm">
         {/* Left Brand Title */}
         <div className="flex items-center space-x-4">
           <div 
@@ -231,70 +174,7 @@ export const Header = () => {
           </div>
         </div>
       </header>
-
-      {/* 3. SIGNATURE COBALT BLUE CATEGORY NAVBAR (Exact from SRK Innovations website) */}
-      <nav className="bg-[#0062bd] text-white px-4 lg:px-8 py-2 flex items-center justify-between text-xs font-semibold shadow-inner">
-        <div className="flex items-center space-x-1 sm:space-x-2">
-          {/* Browse All Categories Dropdown Button */}
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setShowCategoryMenu(!showCategoryMenu)}
-              className="flex items-center space-x-2 bg-[#004f98] hover:bg-[#004280] px-3.5 py-1.5 rounded-lg text-white font-bold tracking-wide transition-colors cursor-pointer"
-            >
-              <Menu className="w-4 h-4" />
-              <span>BROWSE ALL CATEGORY</span>
-              <ChevronDown className="w-3.5 h-3.5" />
-            </button>
-
-            {/* Dropdown Menu */}
-            {showCategoryMenu && (
-              <div className="absolute left-0 top-full mt-1.5 w-56 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 py-1.5 z-50 text-slate-800 dark:text-slate-100 text-xs">
-                {categories.map((cat, idx) => {
-                  const Icon = cat.icon;
-                  return (
-                    <button
-                      key={idx}
-                      onClick={() => handleCategoryClick(cat)}
-                      className="w-full text-left px-4 py-2 hover:bg-blue-50 dark:hover:bg-slate-800 flex items-center space-x-2.5 transition-colors cursor-pointer"
-                    >
-                      <Icon className="w-4 h-4 text-[#0062bd]" />
-                      <span>{cat.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          {/* Quick Category Links */}
-          <div className="hidden md:flex items-center space-x-1 pl-2">
-            {categories.map((cat, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleCategoryClick(cat)}
-                className="px-3 py-1.5 rounded-lg hover:bg-white/10 hover:text-white text-blue-50 transition-colors cursor-pointer font-medium"
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Contact Info on Right */}
-        <div className="hidden lg:flex items-center space-x-4 text-[11px] font-normal text-blue-100">
-          <span className="flex items-center space-x-1">
-            <span>☎</span>
-            <span className="font-semibold text-white">+91 8411958300</span>
-          </span>
-          <span>•</span>
-          <span className="flex items-center space-x-1">
-            <span>✉</span>
-            <span className="font-semibold text-white">info@srkinnovations.com</span>
-          </span>
-        </div>
-      </nav>
-    </div>
   );
 };
+
 
