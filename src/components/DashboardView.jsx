@@ -78,7 +78,7 @@ export const DashboardView = () => {
       {/* Page Title & Subtitle */}
       <div>
         <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Executive Control Dashboard</h1>
-        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">SRK Innovations • Sales, Orders, Financials, and Multi-Location Stock Overview</p>
+        <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">DIY Circuits • Sales, Orders, Financials, and Multi-Location Stock Overview</p>
       </div>
 
       {/* KPI Cards Grid */}

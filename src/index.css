@@ -2,21 +2,21 @@
 
 @layer base {
   :root {
-    --bg-primary: #f8fafc;
+    --bg-primary: #fffafa;
     --bg-card: #ffffff;
     --text-primary: #0f172a;
     --text-secondary: #475569;
-    --accent: #2563eb;
-    --border-color: #e2e8f0;
+    --accent: #dc2626;
+    --border-color: #fee2e2;
   }
 
   .dark {
-    --bg-primary: #0b0f19;
-    --bg-card: #1e293b;
+    --bg-primary: #0e0708;
+    --bg-card: #1a0f11;
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
-    --accent: #3b82f6;
-    --border-color: #334155;
+    --accent: #ef4444;
+    --border-color: #381a1e;
   }
 
   body {

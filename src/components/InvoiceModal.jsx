@@ -43,12 +43,12 @@ export const InvoiceModal = () => {
         <div className="space-y-6 text-xs text-slate-800 p-4 border border-slate-200 rounded-2xl bg-white">
           <div className="flex justify-between items-start border-b border-slate-200 pb-4">
             <div>
-              <h1 className="text-xl font-extrabold text-slate-900">SRK INNOVATIONS</h1>
-              <p className="text-slate-500 font-medium">srkinnovation.com • GSTIN: 27AAAAA0000A1Z5</p>
+              <h1 className="text-xl font-extrabold text-slate-900">DIY CIRCUITS</h1>
+              <p className="text-slate-500 font-medium">diycircuits.in • GSTIN: 27AAAAA0000A1Z5</p>
               <p className="text-slate-500">Tech Park, MIDC, Pune, Maharashtra 411057</p>
             </div>
             <div className="text-right">
-              <h2 className="text-lg font-extrabold text-blue-600 uppercase">TAX INVOICE</h2>
+              <h2 className="text-lg font-extrabold text-red-600 uppercase">TAX INVOICE</h2>
               <span className="font-mono font-bold text-slate-900 text-sm block">{ord.zohoInvoiceRef?.invoiceNumber || 'INV-2026-8891'}</span>
               <span className="text-slate-500">Date: {ord.createdDate}</span>
             </div>
@@ -98,7 +98,7 @@ export const InvoiceModal = () => {
           <div className="flex justify-between items-end pt-4">
             <div className="text-[10px] text-slate-500">
               <p>This is a computer-generated Tax Invoice synced with Zoho Books.</p>
-              <p>SRK Innovations • Thank you for your business!</p>
+              <p>DIY Circuits • Thank you for your business!</p>
             </div>
             <div className="text-right space-y-1">
               <div className="text-xs font-bold text-slate-900">Total Invoice Amount: ₹{ord.totalAmount.toFixed(2)}</div>

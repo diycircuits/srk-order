@@ -28,26 +28,26 @@ export const LoginScreen = () => {
     <div className="min-h-screen bg-slate-950 text-white flex flex-col justify-center items-center p-4 sm:p-6 relative overflow-hidden font-sans">
       
       {/* Background Glow Accents */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-rose-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="w-full max-w-md space-y-8 relative z-10">
         
         {/* Brand Header */}
         <div className="text-center space-y-3">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white mx-auto shadow-xl shadow-blue-500/25 border border-white/10">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 via-rose-600 to-amber-600 flex items-center justify-center text-white mx-auto shadow-xl shadow-red-500/30 border border-white/10">
             <Zap className="w-7 h-7 fill-white/20" />
           </div>
 
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-              SRK Innovations
+              DIY Circuits
             </h1>
-            <p className="text-xs text-blue-400 font-semibold tracking-wider uppercase mt-1">
+            <p className="text-xs text-red-400 font-semibold tracking-wider uppercase mt-1">
               Enterprise Order Management & ERP System
             </p>
             <p className="text-xs text-slate-400 font-medium mt-1">
-              srkinnovations.com • Morning Employee Login Gate
+              diycircuits.in • Employee Login Gate
             </p>
           </div>
         </div>
@@ -64,7 +64,7 @@ export const LoginScreen = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4 text-xs">
             <div>
-              <label className="block text-slate-300 font-bold mb-1.5">Employee Email / Username</label>
+              <label className="block text-slate-300 font-bold mb-1.5">Work Email</label>
               <div className="relative">
                 <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                 <input
@@ -72,8 +72,8 @@ export const LoginScreen = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@srkinnovation.com"
-                  className="w-full bg-slate-900/80 border border-slate-700/80 rounded-2xl pl-10 pr-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 font-medium transition-all"
+                  placeholder="admin@diycircuits.in"
+                  className="w-full bg-slate-900/80 border border-slate-700/80 rounded-2xl pl-10 pr-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 font-medium transition-all"
                 />
               </div>
             </div>
@@ -88,7 +88,7 @@ export const LoginScreen = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full bg-slate-900/80 border border-slate-700/80 rounded-2xl pl-10 pr-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 font-medium transition-all"
+                  className="w-full bg-slate-900/80 border border-slate-700/80 rounded-2xl pl-10 pr-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 font-medium transition-all"
                 />
               </div>
             </div>
@@ -96,9 +96,9 @@ export const LoginScreen = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-2xl text-xs flex items-center justify-center space-x-2 shadow-lg shadow-blue-600/30 active:scale-98 transition-all disabled:opacity-50"
+              className="w-full mt-2 bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 hover:from-red-500 hover:to-rose-500 text-white font-bold py-3.5 rounded-2xl text-xs flex items-center justify-center space-x-2 shadow-lg shadow-red-600/30 active:scale-98 transition-all disabled:opacity-50 cursor-pointer"
             >
-              <span>{loading ? 'Authenticating...' : 'Sign In to SRK ERP'}</span>
+              <span>{loading ? 'Authenticating...' : 'Sign In to DIY Circuits ERP'}</span>
               {!loading && <ArrowRight className="w-4 h-4" />}
             </button>
           </form>
@@ -111,22 +111,22 @@ export const LoginScreen = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <button
                 type="button"
-                onClick={() => { setEmail('admin@srkinnovation.com'); setPassword('admin123'); login('admin@srkinnovation.com', 'admin123'); }}
-                className="bg-blue-600/20 hover:bg-blue-600/40 border border-blue-500/30 text-blue-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center"
+                onClick={() => { setEmail('admin@diycircuits.in'); setPassword('admin123'); login('admin@diycircuits.in', 'admin123'); }}
+                className="bg-red-600/20 hover:bg-red-600/40 border border-red-500/30 text-red-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer"
               >
                 👑 Super Admin
               </button>
               <button
                 type="button"
-                onClick={() => { setEmail('warehouse@srkinnovation.com'); setPassword('warehouse123'); login('warehouse@srkinnovation.com', 'warehouse123'); }}
-                className="bg-purple-600/20 hover:bg-purple-600/40 border border-purple-500/30 text-purple-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center"
+                onClick={() => { setEmail('warehouse@diycircuits.in'); setPassword('warehouse123'); login('warehouse@diycircuits.in', 'warehouse123'); }}
+                className="bg-rose-600/20 hover:bg-rose-600/40 border border-rose-500/30 text-rose-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer"
               >
                 📦 Dispatch
               </button>
               <button
                 type="button"
-                onClick={() => { setEmail('sales@srkinnovation.com'); setPassword('sales123'); login('sales@srkinnovation.com', 'sales123'); }}
-                className="bg-emerald-600/20 hover:bg-emerald-600/40 border border-emerald-500/30 text-emerald-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center"
+                onClick={() => { setEmail('sales@diycircuits.in'); setPassword('sales123'); login('sales@diycircuits.in', 'sales123'); }}
+                className="bg-amber-600/20 hover:bg-amber-600/40 border border-amber-500/30 text-amber-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer"
               >
                 💼 Sales
               </button>
@@ -137,7 +137,7 @@ export const LoginScreen = () => {
 
         {/* Footer info */}
         <p className="text-[11px] text-center text-slate-500">
-          🛡️ Zero Data Loss WAL Mode Active • Secured by SRK Innovations
+          🛡️ Zero Data Loss WAL Mode Active • Secured by DIY Circuits
         </p>
 
       </div>

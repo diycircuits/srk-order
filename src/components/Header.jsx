@@ -53,13 +53,13 @@ export const Header = () => {
           onClick={() => setActiveTab('dashboard')}
           className="flex items-center space-x-3 cursor-pointer group"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 via-rose-600 to-amber-600 flex items-center justify-center text-white shadow-md shadow-red-500/25 group-hover:scale-105 transition-transform">
             <Zap className="w-5 h-5 fill-white/20" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-blue-600 transition-colors">
-                SRK Innovations
+              <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-red-600 transition-colors">
+                DIY Circuits
               </span>
               <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30 flex items-center space-x-1">
                 <Wifi className="w-3 h-3 animate-pulse text-emerald-500" />
@@ -67,7 +67,7 @@ export const Header = () => {
               </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">
-              Open on any laptop: <strong className="text-blue-600 dark:text-blue-400 font-mono">{networkInfo.frontendLanUrl || 'http://localhost:5173'}</strong>
+              DIY Circuits ERP • <strong className="text-red-600 dark:text-red-400 font-mono">srkorder.radical-global.com</strong>
             </p>
           </div>
         </div>
@@ -82,7 +82,7 @@ export const Header = () => {
             placeholder="Search Order ID (SRK-ORD-...), SKU, Customer, AWB, EPC..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-500/20 transition-all"
+            className="w-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 rounded-xl pl-10 pr-4 py-2 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:border-red-600 focus:ring-2 focus:ring-red-500/20 transition-all"
           />
         </div>
       </div>
@@ -91,12 +91,12 @@ export const Header = () => {
       <div className="flex items-center space-x-3">
         {/* Role Switcher Dropdown */}
         <div className="hidden lg:flex items-center space-x-2 bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 px-3 py-1.5 rounded-xl text-xs">
-          <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+          <ShieldCheck className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
           <span className="text-slate-500 dark:text-slate-400 font-medium">Role:</span>
           <select
             value={activeRole}
             onChange={(e) => setActiveRole(e.target.value)}
-            className="bg-transparent text-blue-700 dark:text-blue-300 font-bold focus:outline-none cursor-pointer"
+            className="bg-transparent text-red-700 dark:text-red-300 font-bold focus:outline-none cursor-pointer"
           >
             <option value="Super Admin" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Super Admin</option>
             <option value="Management" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Management</option>
@@ -115,7 +115,7 @@ export const Header = () => {
           title="Toggle Light / Dark Theme Mode"
           className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
         >
-          {theme === 'light' ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-blue-400" />}
+          {theme === 'light' ? <Sun className="w-4 h-4 text-amber-500" /> : <Moon className="w-4 h-4 text-red-400" />}
         </button>
 
         {/* Simulate Shopify Order Webhook Button */}
@@ -133,18 +133,18 @@ export const Header = () => {
           onClick={() => setActiveTab('public-track')}
           className={`flex items-center space-x-1.5 text-xs font-semibold px-3 py-2 rounded-xl transition-all border ${
             activeTab === 'public-track' 
-              ? 'bg-blue-600 text-white border-blue-600 shadow-md shadow-blue-500/20' 
+              ? 'bg-red-600 text-white border-red-600 shadow-md shadow-red-500/20' 
               : 'bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
           }`}
         >
-          <ExternalLink className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+          <ExternalLink className="w-3.5 h-3.5 text-red-600 dark:text-red-400" />
           <span className="hidden sm:inline">Track Portal</span>
         </button>
 
         {/* Book Order Quick Action */}
         <button
           onClick={() => setCreateOrderOpen(true)}
-          className="flex items-center space-x-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium text-xs px-3.5 py-2 rounded-xl transition-all shadow-md shadow-blue-600/20 active:scale-95"
+          className="flex items-center space-x-1.5 bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-medium text-xs px-3.5 py-2 rounded-xl transition-all shadow-md shadow-red-600/25 active:scale-95 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span className="font-semibold">Book Order</span>
@@ -167,7 +167,7 @@ export const Header = () => {
         <div className="flex items-center space-x-2 pl-2 border-l border-slate-200 dark:border-slate-800">
           <div 
             title={`Role: ${activeRole}`}
-            className="w-8.5 h-8.5 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white font-bold flex items-center justify-center text-sm shadow-sm cursor-pointer hover:opacity-90"
+            className="w-8.5 h-8.5 rounded-xl bg-gradient-to-br from-red-600 to-rose-700 text-white font-bold flex items-center justify-center text-sm shadow-sm cursor-pointer hover:opacity-90"
           >
             {activeRole.charAt(0)}
           </div>

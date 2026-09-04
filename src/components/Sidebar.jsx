@@ -71,7 +71,7 @@ export const Sidebar = () => {
       <div className="space-y-6">
         <div>
           <p className="px-3 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
-            SRK Innovations ERP
+            DIY Circuits ERP
           </p>
 
           <nav className="space-y-1">
@@ -89,12 +89,12 @@ export const Sidebar = () => {
                     }}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-medium text-xs transition-all group ${
                       isActive 
-                        ? 'bg-blue-50 dark:bg-blue-600/15 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/30 font-bold shadow-sm' 
+                        ? 'bg-red-50 dark:bg-red-600/15 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-500/30 font-bold shadow-sm' 
                         : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-slate-900 border border-transparent'
                     }`}
                   >
                     <div className="flex items-center space-x-3">
-                      <Icon className={`w-4 h-4 transition-colors ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-slate-500 group-hover:text-slate-700'}`} />
+                      <Icon className={`w-4 h-4 transition-colors ${isActive ? 'text-red-600 dark:text-red-400' : 'text-slate-500 group-hover:text-slate-700'}`} />
                       <span>{item.label}</span>
                     </div>
 
@@ -105,13 +105,13 @@ export const Sidebar = () => {
                     )}
 
                     {hasSub && (
-                      <ChevronRight className={`w-3.5 h-3.5 transition-transform text-slate-400 ${isActive ? 'rotate-90 text-blue-600' : ''}`} />
+                      <ChevronRight className={`w-3.5 h-3.5 transition-transform text-slate-400 ${isActive ? 'rotate-90 text-red-600' : ''}`} />
                     )}
                   </button>
 
                   {/* Submodules when active */}
                   {isActive && hasSub && (
-                    <div className="ml-4 pl-3 border-l border-blue-200 dark:border-blue-500/20 space-y-1 py-1">
+                    <div className="ml-4 pl-3 border-l border-red-200 dark:border-red-500/20 space-y-1 py-1">
                       {item.submodules.map((sub) => {
                         const isSubActive = activeSubTab === sub.id;
                         return (
@@ -124,7 +124,7 @@ export const Sidebar = () => {
                             }}
                             className={`w-full text-left px-3 py-1.5 rounded-lg text-[11px] transition-colors ${
                               isSubActive 
-                                ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-300 font-bold' 
+                                ? 'bg-red-100 dark:bg-red-500/20 text-red-800 dark:text-red-300 font-bold' 
                                 : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 hover:bg-slate-100'
                             }`}
                           >

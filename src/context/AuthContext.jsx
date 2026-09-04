@@ -60,11 +60,12 @@ export const AuthProvider = ({ children }) => {
     }
 
     // Offline / Demo fallback authentication
-    if (email.trim().toLowerCase() === 'admin@srkinnovation.com' && password === 'admin123') {
+    const lowerEmail = email.trim().toLowerCase();
+    if ((lowerEmail === 'admin@diycircuits.in' || lowerEmail === 'admin@srkinnovation.com') && password === 'admin123') {
       const defaultUser = {
         id: 1,
         name: 'Super Admin',
-        email: 'admin@srkinnovation.com',
+        email: lowerEmail,
         role: 'Super Admin',
         permissions: ['*']
       };

@@ -45,8 +45,8 @@ export const AppProvider = ({ children }) => {
   const [rmaTickets, setRmaTickets] = useState(initialRmaTickets || []);
   const [users, setUsers] = useState([]);
   const [systemConfig, setSystemConfig] = useState({
-    companyName: 'SRK Innovation Pvt. Ltd.',
-    domainUrl: 'srkinnovation.com',
+    companyName: 'DIY Circuits',
+    domainUrl: 'diycircuits.in',
     defaultCurrency: 'Indian Rupee (₹ INR)',
     taxRate: 18,
     timezone: 'Asia/Kolkata (IST)'
