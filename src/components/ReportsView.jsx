@@ -52,7 +52,7 @@ export const ReportsView = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Executive Reports & Analytics</h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400">DIY Circuits executive reporting on sales, stock valuation, and courier delivery speeds</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">SRK Innovations executive reporting on sales, stock valuation, and courier delivery speeds</p>
         </div>
 
         <div className="flex items-center space-x-2">

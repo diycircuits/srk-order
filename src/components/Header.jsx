@@ -53,13 +53,13 @@ export const Header = () => {
           onClick={() => setActiveTab('dashboard')}
           className="flex items-center space-x-3 cursor-pointer group"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 via-rose-600 to-amber-600 flex items-center justify-center text-white shadow-md shadow-red-500/25 group-hover:scale-105 transition-transform">
-            <Zap className="w-5 h-5 fill-white/20" />
+          <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 p-1 flex items-center justify-center shadow-md shadow-red-500/20 border border-slate-200 dark:border-slate-700 group-hover:scale-105 transition-transform overflow-hidden">
+            <img src="./srk-logo.png" alt="SRK Innovations" className="w-full h-full object-contain" />
           </div>
           <div>
             <div className="flex items-center space-x-2">
               <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-red-600 transition-colors">
-                DIY Circuits
+                SRK Innovations
               </span>
               <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30 flex items-center space-x-1">
                 <Wifi className="w-3 h-3 animate-pulse text-emerald-500" />
@@ -67,7 +67,7 @@ export const Header = () => {
               </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">
-              DIY Circuits ERP • <strong className="text-red-600 dark:text-red-400 font-mono">srkorder.radical-global.com</strong>
+              srkinnovations.com • <strong className="text-red-600 dark:text-red-400 font-mono">srkorder.radical-global.com</strong>
             </p>
           </div>
         </div>

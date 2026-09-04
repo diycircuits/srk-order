@@ -70,9 +70,12 @@ export const Sidebar = () => {
     <aside className="w-64 bg-white dark:bg-slate-900/90 border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between min-h-[calc(100vh-61px)] p-4 select-none shrink-0 hidden md:flex">
       <div className="space-y-6">
         <div>
-          <p className="px-3 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
-            DIY Circuits ERP
-          </p>
+          <div className="flex items-center space-x-2 px-3 mb-3">
+            <img src="./srk-logo.png" alt="SRK Innovations" className="w-5 h-5 object-contain" />
+            <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              SRK Innovations ERP
+            </p>
+          </div>
 
           <nav className="space-y-1">
             {navItems.map((item) => {

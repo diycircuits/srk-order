@@ -35,19 +35,19 @@ export const LoginScreen = () => {
         
         {/* Brand Header */}
         <div className="text-center space-y-3">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-600 via-rose-600 to-amber-600 flex items-center justify-center text-white mx-auto shadow-xl shadow-red-500/30 border border-white/10">
-            <Zap className="w-7 h-7 fill-white/20" />
+          <div className="w-20 h-20 rounded-3xl bg-white p-2 flex items-center justify-center mx-auto shadow-2xl shadow-red-500/30 border border-slate-700/60">
+            <img src="./srk-logo.png" alt="SRK Innovations" className="w-full h-full object-contain" />
           </div>
 
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-              DIY Circuits
+              SRK Innovations
             </h1>
             <p className="text-xs text-red-400 font-semibold tracking-wider uppercase mt-1">
-              Enterprise Order Management & ERP System
+              Retail Automation, RFID & Security Enterprise ERP
             </p>
             <p className="text-xs text-slate-400 font-medium mt-1">
-              diycircuits.in • Employee Login Gate
+              www.srkinnovations.com • Employee Gate
             </p>
           </div>
         </div>
@@ -72,7 +72,7 @@ export const LoginScreen = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@diycircuits.in"
+                  placeholder="admin@srkinnovations.com"
                   className="w-full bg-slate-900/80 border border-slate-700/80 rounded-2xl pl-10 pr-4 py-3 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-red-500 focus:ring-2 focus:ring-red-500/20 font-medium transition-all"
                 />
               </div>
@@ -98,7 +98,7 @@ export const LoginScreen = () => {
               disabled={loading}
               className="w-full mt-2 bg-gradient-to-r from-red-600 via-rose-600 to-amber-600 hover:from-red-500 hover:to-rose-500 text-white font-bold py-3.5 rounded-2xl text-xs flex items-center justify-center space-x-2 shadow-lg shadow-red-600/30 active:scale-98 transition-all disabled:opacity-50 cursor-pointer"
             >
-              <span>{loading ? 'Authenticating...' : 'Sign In to DIY Circuits ERP'}</span>
+              <span>{loading ? 'Authenticating...' : 'Sign In to SRK Innovations ERP'}</span>
               {!loading && <ArrowRight className="w-4 h-4" />}
             </button>
           </form>
@@ -111,21 +111,21 @@ export const LoginScreen = () => {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <button
                 type="button"
-                onClick={() => { setEmail('admin@diycircuits.in'); setPassword('admin123'); login('admin@diycircuits.in', 'admin123'); }}
+                onClick={() => { setEmail('admin@srkinnovations.com'); setPassword('admin123'); login('admin@srkinnovations.com', 'admin123'); }}
                 className="bg-red-600/20 hover:bg-red-600/40 border border-red-500/30 text-red-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer"
               >
                 👑 Super Admin
               </button>
               <button
                 type="button"
-                onClick={() => { setEmail('warehouse@diycircuits.in'); setPassword('warehouse123'); login('warehouse@diycircuits.in', 'warehouse123'); }}
+                onClick={() => { setEmail('warehouse@srkinnovations.com'); setPassword('warehouse123'); login('warehouse@srkinnovations.com', 'warehouse123'); }}
                 className="bg-rose-600/20 hover:bg-rose-600/40 border border-rose-500/30 text-rose-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer"
               >
                 📦 Dispatch
               </button>
               <button
                 type="button"
-                onClick={() => { setEmail('sales@diycircuits.in'); setPassword('sales123'); login('sales@diycircuits.in', 'sales123'); }}
+                onClick={() => { setEmail('sales@srkinnovations.com'); setPassword('sales123'); login('sales@srkinnovations.com', 'sales123'); }}
                 className="bg-amber-600/20 hover:bg-amber-600/40 border border-amber-500/30 text-amber-300 py-2 px-2 rounded-xl text-[11px] font-bold transition-all text-center cursor-pointer"
               >
                 💼 Sales
@@ -137,7 +137,7 @@ export const LoginScreen = () => {
 
         {/* Footer info */}
         <p className="text-[11px] text-center text-slate-500">
-          🛡️ Zero Data Loss WAL Mode Active • Secured by DIY Circuits
+          🛡️ Zero Data Loss WAL Mode Active • Secured by SRK Innovations
         </p>
 
       </div>
