@@ -26,46 +26,59 @@ export const CreateOrderModal = () => {
   if (!createOrderOpen) return null;
 
   const calculateTotal = () => {
-    return selectedItems.reduce((sum, item) => sum + (item.qty * item.unitPrice), 0);
+    return selectedItems.reduce((sum, item) => sum + ((Number(item.qty) || 0) * (Number(item.unitPrice) || 0)), 0);
   };
 
-  const handleCustomerSelect = (name) => {
+  const handleCustomerChange = (name) => {
     setCustomerName(name);
-    const found = customers.find(c => c.name === name);
+    const found = customers.find(c => c.name.toLowerCase().trim() === name.toLowerCase().trim());
     if (found) {
-      setCustomerEmail(found.email || '');
-      setCustomerPhone(found.phone || '');
-      setGstin(found.gstin || '');
-      setShippingAddress(found.address || '');
+      if (found.email) setCustomerEmail(found.email);
+      if (found.phone) setCustomerPhone(found.phone);
+      if (found.gstin) setGstin(found.gstin);
+      if (found.address) setShippingAddress(found.address);
     }
   };
 
   const handleAddItem = () => {
-    const defaultProd = products[0] || { sku: 'SRK-GENERIC', name: 'Hardware Component', unitPrice: 1000 };
+    const defaultProd = products[0] || { sku: 'SRK-GENERIC', name: '', unitPrice: 0 };
     setSelectedItems(prev => [
       ...prev,
-      { sku: defaultProd.sku, name: defaultProd.name, qty: 1, unitPrice: defaultProd.unitPrice }
+      { sku: defaultProd.sku || 'SRK-ITEM', name: defaultProd.name || '', qty: 1, unitPrice: defaultProd.unitPrice || 0 }
     ]);
   };
 
-  const handleProductSelect = (index, sku) => {
-    const found = products.find(p => p.sku === sku);
-    if (found) {
-      setSelectedItems(prev => prev.map((item, idx) => {
-        if (idx === index) {
-          return {
-            ...item,
-            sku: found.sku,
-            name: found.name,
-            unitPrice: found.unitPrice
-          };
-        }
-        return item;
-      }));
-    }
+  const handleUpdateItem = (index, field, value) => {
+    setSelectedItems(prev => prev.map((item, idx) => {
+      if (idx !== index) return item;
+      return { ...item, [field]: value };
+    }));
+  };
+
+  const handleItemNameChange = (index, nameValue) => {
+    const found = products.find(p => 
+      p.name.toLowerCase().trim() === nameValue.toLowerCase().trim() ||
+      p.sku.toLowerCase().trim() === nameValue.toLowerCase().trim()
+    );
+    setSelectedItems(prev => prev.map((item, idx) => {
+      if (idx !== index) return item;
+      if (found) {
+        return {
+          ...item,
+          name: found.name,
+          sku: found.sku,
+          unitPrice: found.unitPrice
+        };
+      }
+      return {
+        ...item,
+        name: nameValue
+      };
+    }));
   };
 
   const handleRemoveItem = (index) => {
+    if (selectedItems.length <= 1) return;
     setSelectedItems(prev => prev.filter((_, i) => i !== index));
   };
 
@@ -83,15 +96,18 @@ export const CreateOrderModal = () => {
       paymentStatus,
       totalAmount,
       items: selectedItems.map(item => ({
-        ...item,
-        subtotal: item.qty * item.unitPrice
+        sku: item.sku || 'SRK-GENERIC',
+        name: item.name || 'Industrial Item',
+        qty: Number(item.qty) || 1,
+        unitPrice: Number(item.unitPrice) || 0,
+        subtotal: (Number(item.qty) || 1) * (Number(item.unitPrice) || 0)
       }))
     });
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-md animate-fadeIn">
-      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-900 dark:text-slate-100">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden text-slate-900 dark:text-slate-100">
         
         {/* Modal Header */}
         <div className="p-5 px-6 bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -122,7 +138,7 @@ export const CreateOrderModal = () => {
               <select
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold"
+                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold focus:ring-2 focus:ring-blue-500 focus:outline-none"
               >
                 <option value="Sales Team">Sales Team</option>
                 <option value="Shopify">Shopify Store</option>
@@ -136,7 +152,7 @@ export const CreateOrderModal = () => {
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value)}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold"
+                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold focus:ring-2 focus:ring-blue-500 focus:outline-none"
               >
                 <option value="NORMAL">NORMAL</option>
                 <option value="HIGH">HIGH</option>
@@ -149,7 +165,7 @@ export const CreateOrderModal = () => {
               <select
                 value={paymentStatus}
                 onChange={(e) => setPaymentStatus(e.target.value)}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold"
+                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold focus:ring-2 focus:ring-blue-500 focus:outline-none"
               >
                 <option value="unpaid">Unpaid</option>
                 <option value="partial">Partial</option>
@@ -160,16 +176,25 @@ export const CreateOrderModal = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1">Customer Account</label>
-              <select
-                value={customerName}
-                onChange={(e) => handleCustomerSelect(e.target.value)}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold"
-              >
-                {customers.map(c => (
-                  <option key={c.id} value={c.name}>{c.name}</option>
-                ))}
-              </select>
+              <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1">
+                Customer Account <span className="text-slate-400 font-normal text-[11px]">(Editable / Select from list)</span>
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  list="customer-account-suggestions"
+                  value={customerName}
+                  onChange={(e) => handleCustomerChange(e.target.value)}
+                  placeholder="Type or select Customer / Company..."
+                  className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  required
+                />
+                <datalist id="customer-account-suggestions">
+                  {customers.map(c => (
+                    <option key={c.id} value={c.name} />
+                  ))}
+                </datalist>
+              </div>
             </div>
 
             <div>
@@ -179,7 +204,7 @@ export const CreateOrderModal = () => {
                 required
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold"
+                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-semibold focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
             </div>
           </div>
@@ -192,7 +217,7 @@ export const CreateOrderModal = () => {
                 required
                 value={customerEmail}
                 onChange={(e) => setCustomerEmail(e.target.value)}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white"
+                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
             </div>
 
@@ -202,7 +227,7 @@ export const CreateOrderModal = () => {
                 type="text"
                 value={gstin}
                 onChange={(e) => setGstin(e.target.value)}
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-mono"
+                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white font-mono focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
             </div>
           </div>
@@ -214,83 +239,149 @@ export const CreateOrderModal = () => {
               required
               value={shippingAddress}
               onChange={(e) => setShippingAddress(e.target.value)}
-              className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white"
+              className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
             ></textarea>
           </div>
 
           {/* Items Table */}
           <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
             <div className="flex items-center justify-between">
-              <label className="font-bold text-slate-900 dark:text-white">Order Line Items</label>
+              <div>
+                <label className="font-bold text-slate-900 dark:text-white">Order Line Items</label>
+                <span className="text-[11px] text-slate-400 block">Edit item description, SKU, rate, or quantity freely</span>
+              </div>
               <button
                 type="button"
                 onClick={handleAddItem}
-                className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center space-x-1"
+                className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center space-x-1 bg-blue-50 dark:bg-blue-900/30 px-3 py-1.5 rounded-xl"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Add Item</span>
               </button>
             </div>
 
+            <datalist id="products-catalog-datalist">
+              {products.map(p => (
+                <option key={p.id || p.sku} value={p.name}>
+                  {p.sku} — ₹{p.unitPrice}
+                </option>
+              ))}
+            </datalist>
+
+            {/* Table Header on sm+ */}
+            <div className="hidden sm:flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 pt-1">
+              <div className="flex-1 min-w-[200px]">Item Description & SKU</div>
+              <div className="flex items-center space-x-2.5">
+                <div className="w-24 text-right pr-2">Rate (₹)</div>
+                <div className="w-16 text-center">Qty</div>
+                <div className="w-24 text-right pr-2">Total (₹)</div>
+                <div className="w-8"></div>
+              </div>
+            </div>
+
             {selectedItems.map((item, idx) => (
-              <div key={idx} className="bg-slate-50 dark:bg-slate-800/40 p-3 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between space-x-3">
-                <div className="flex-1">
-                  <select
-                    value={item.sku}
-                    onChange={(e) => handleProductSelect(idx, e.target.value)}
-                    className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-1 text-xs font-bold text-slate-900 dark:text-white"
-                  >
-                    {products.map(p => (
-                      <option key={p.id} value={p.sku}>{p.name} (₹{p.unitPrice})</option>
-                    ))}
-                  </select>
-                  <span className="font-mono text-[10px] text-blue-600 dark:text-blue-400 block mt-1">{item.sku}</span>
-                </div>
-
-                <div className="w-20">
+              <div
+                key={idx}
+                className="bg-slate-50 dark:bg-slate-800/40 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center gap-2.5"
+              >
+                {/* Product Name & SKU */}
+                <div className="flex-1 min-w-[200px] space-y-1.5">
                   <input
-                    type="number"
-                    value={item.qty}
-                    onChange={(e) => {
-                      const val = parseInt(e.target.value, 10) || 1;
-                      setSelectedItems(prev => prev.map((it, i) => i === idx ? { ...it, qty: val } : it));
-                    }}
-                    className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-1 text-center font-bold text-slate-900 dark:text-white"
+                    type="text"
+                    list="products-catalog-datalist"
+                    value={item.name}
+                    onChange={(e) => handleItemNameChange(idx, e.target.value)}
+                    placeholder="Type product name or select from catalog..."
+                    className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    required
                   />
+                  <div className="flex items-center space-x-2">
+                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">SKU:</span>
+                    <input
+                      type="text"
+                      value={item.sku}
+                      onChange={(e) => handleUpdateItem(idx, 'sku', e.target.value)}
+                      placeholder="SKU Code"
+                      className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1 text-[11px] font-mono font-medium text-blue-600 dark:text-blue-400 focus:ring-1 focus:ring-blue-500 focus:outline-none"
+                    />
+                  </div>
                 </div>
 
-                <div className="text-right w-24">
-                  <span className="font-bold text-slate-900 dark:text-white block">₹{(item.qty * item.unitPrice).toFixed(2)}</span>
-                </div>
+                {/* Right controls: Rate, Qty, Total, Delete */}
+                <div className="flex items-center justify-between sm:justify-end space-x-2.5 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200 dark:border-slate-800">
+                  {/* Rate / Unit Price */}
+                  <div className="w-24">
+                    <label className="block text-[10px] font-bold text-slate-400 mb-0.5 sm:hidden">Rate (₹)</label>
+                    <div className="relative">
+                      <span className="absolute left-2.5 top-2 text-slate-400 text-xs font-bold">₹</span>
+                      <input
+                        type="number"
+                        step="any"
+                        min="0"
+                        value={item.unitPrice}
+                        onChange={(e) => handleUpdateItem(idx, 'unitPrice', parseFloat(e.target.value) || 0)}
+                        placeholder="0.00"
+                        className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl pl-6 pr-2 py-2 text-xs font-bold text-slate-900 dark:text-white text-right focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        required
+                      />
+                    </div>
+                  </div>
 
-                <button
-                  type="button"
-                  onClick={() => handleRemoveItem(idx)}
-                  className="text-rose-500 hover:text-rose-700 p-1"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                  {/* Qty */}
+                  <div className="w-16">
+                    <label className="block text-[10px] font-bold text-slate-400 mb-0.5 sm:hidden">Qty</label>
+                    <input
+                      type="number"
+                      min="1"
+                      value={item.qty}
+                      onChange={(e) => handleUpdateItem(idx, 'qty', parseInt(e.target.value, 10) || 1)}
+                      className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-2 py-2 text-xs text-center font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                      required
+                    />
+                  </div>
+
+                  {/* Line Total */}
+                  <div className="w-24 text-right">
+                    <label className="block text-[10px] font-bold text-slate-400 mb-0.5 sm:hidden">Amount</label>
+                    <span className="font-extrabold text-slate-900 dark:text-white text-xs block py-2">
+                      ₹{((Number(item.qty) || 0) * (Number(item.unitPrice) || 0)).toFixed(2)}
+                    </span>
+                  </div>
+
+                  {/* Delete */}
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveItem(idx)}
+                    disabled={selectedItems.length <= 1}
+                    className={`p-2 rounded-xl text-rose-500 hover:text-rose-700 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors ${selectedItems.length <= 1 ? 'opacity-30 cursor-not-allowed' : ''}`}
+                    title={selectedItems.length <= 1 ? 'At least one item is required' : 'Delete item'}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
 
           <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <div>
-              <span className="text-slate-500 block text-[11px]">Total Booking Amount</span>
-              <strong className="text-xl font-extrabold text-blue-600 dark:text-blue-400">₹{calculateTotal().toFixed(2)}</strong>
+              <span className="text-slate-500 block text-[11px] font-semibold">Total Booking Amount</span>
+              <strong className="text-2xl font-extrabold text-blue-600 dark:text-blue-400">
+                ₹{calculateTotal().toFixed(2)}
+              </strong>
             </div>
 
             <div className="flex items-center space-x-3">
               <button
                 type="button"
                 onClick={() => setCreateOrderOpen(false)}
-                className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-semibold px-4 py-2 rounded-xl text-xs"
+                className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 font-semibold px-4 py-2.5 rounded-xl text-xs transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow-md shadow-blue-500/20"
+                className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs shadow-md shadow-blue-500/25 transition-colors"
               >
                 Book & Run Auto Stock Check
               </button>
