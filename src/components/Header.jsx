@@ -63,7 +63,7 @@ export const Header = () => {
               </span>
               <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30 flex items-center space-x-1">
                 <Wifi className="w-3 h-3 animate-pulse text-emerald-500" />
-                <span>Office SaaS Live</span>
+                <span>Cloud Live • srkorder</span>
               </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 font-medium hidden sm:block">
