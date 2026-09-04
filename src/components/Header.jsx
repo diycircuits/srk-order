@@ -7,8 +7,7 @@ import {
   ShieldCheck, 
   RefreshCw, 
   Sun, 
-  Moon, 
-  Wifi
+  Moon
 } from 'lucide-react';
 
 export const Header = () => {
@@ -63,20 +62,9 @@ export const Header = () => {
             <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-800 p-1 flex items-center justify-center shadow-md shadow-blue-500/20 border border-slate-200 dark:border-slate-700 group-hover:scale-105 transition-transform overflow-hidden">
               <img src="./srk-logo.png" alt="SRK Innovations" className="w-full h-full object-contain" />
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-[#0062bd] transition-colors">
-                  SRK Innovations
-                </span>
-                <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30 flex items-center space-x-1">
-                  <Wifi className="w-3 h-3 animate-pulse text-emerald-500" />
-                  <span>Live ERP</span>
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium hidden sm:block">
-                srkinnovations.com • <strong className="text-[#0062bd] dark:text-blue-400 font-mono">srkorder.radical-global.com</strong>
-              </p>
-            </div>
+            <span className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white group-hover:text-[#0062bd] transition-colors">
+              SRK Innovations
+            </span>
           </div>
         </div>
 
