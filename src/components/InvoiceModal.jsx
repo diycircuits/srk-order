@@ -75,7 +75,7 @@ export const InvoiceModal = () => {
           <table className="w-full text-left border-collapse border border-slate-200">
             <thead className="bg-slate-100 font-bold uppercase text-[10px] text-slate-600">
               <tr>
-                <th className="p-2 border border-slate-200">SKU / ITEM</th>
+                <th className="p-2 border border-slate-200">ITEM DESCRIPTION</th>
                 <th className="p-2 border border-slate-200 text-center">QTY</th>
                 <th className="p-2 border border-slate-200 text-right">UNIT PRICE</th>
                 <th className="p-2 border border-slate-200 text-right">GST (18%)</th>
@@ -87,7 +87,6 @@ export const InvoiceModal = () => {
                 <tr key={i}>
                   <td className="p-2 border border-slate-200 font-medium">
                     <span className="font-bold block">{it.name}</span>
-                    <span className="font-mono text-[10px] text-slate-500">{it.sku}</span>
                   </td>
                   <td className="p-2 border border-slate-200 text-center font-bold">{it.qty}</td>
                   <td className="p-2 border border-slate-200 text-right">₹{it.unitPrice.toFixed(2)}</td>

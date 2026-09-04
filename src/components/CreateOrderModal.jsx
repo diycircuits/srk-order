@@ -248,7 +248,7 @@ export const CreateOrderModal = () => {
             <div className="flex items-center justify-between">
               <div>
                 <label className="font-bold text-slate-900 dark:text-white">Order Line Items</label>
-                <span className="text-[11px] text-slate-400 block">Edit item description, SKU, rate, or quantity freely</span>
+                <span className="text-[11px] text-slate-400 block">Edit item description, rate, or quantity freely</span>
               </div>
               <button
                 type="button"
@@ -261,16 +261,16 @@ export const CreateOrderModal = () => {
             </div>
 
             <datalist id="products-catalog-datalist">
-              {products.map(p => (
-                <option key={p.id || p.sku} value={p.name}>
-                  {p.sku} — ₹{p.unitPrice}
+              {products.map((p, pIdx) => (
+                <option key={p.id || pIdx} value={p.name}>
+                  ₹{p.unitPrice}
                 </option>
               ))}
             </datalist>
 
             {/* Table Header on sm+ */}
             <div className="hidden sm:flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 pt-1">
-              <div className="flex-1 min-w-[200px]">Item Description & SKU</div>
+              <div className="flex-1 min-w-[200px]">Item Description</div>
               <div className="flex items-center space-x-2.5">
                 <div className="w-24 text-right pr-2">Rate (₹)</div>
                 <div className="w-16 text-center">Qty</div>
@@ -284,27 +284,17 @@ export const CreateOrderModal = () => {
                 key={idx}
                 className="bg-slate-50 dark:bg-slate-800/40 p-3 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center gap-2.5"
               >
-                {/* Product Name & SKU */}
-                <div className="flex-1 min-w-[200px] space-y-1.5">
+                {/* Product Name / Description */}
+                <div className="flex-1 min-w-[200px]">
                   <input
                     type="text"
                     list="products-catalog-datalist"
                     value={item.name}
                     onChange={(e) => handleItemNameChange(idx, e.target.value)}
                     placeholder="Type product name or select from catalog..."
-                    className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                    className="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     required
                   />
-                  <div className="flex items-center space-x-2">
-                    <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">SKU:</span>
-                    <input
-                      type="text"
-                      value={item.sku}
-                      onChange={(e) => handleUpdateItem(idx, 'sku', e.target.value)}
-                      placeholder="SKU Code"
-                      className="flex-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1 text-[11px] font-mono font-medium text-blue-600 dark:text-blue-400 focus:ring-1 focus:ring-blue-500 focus:outline-none"
-                    />
-                  </div>
                 </div>
 
                 {/* Right controls: Rate, Qty, Total, Delete */}
