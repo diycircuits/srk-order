@@ -25,7 +25,7 @@ export const IntegrationsView = () => {
     <div className="space-y-6 pb-12">
       <div>
         <h1 className="text-xl font-bold text-slate-900 dark:text-white">Integrations & Communication Engine</h1>
-        <p className="text-xs text-slate-500 dark:text-slate-400">Shopify Webhooks, Zoho Books API, Meta WhatsApp Business API & Email Automation</p>
+        <p className="text-xs text-slate-500 dark:text-slate-400">Shopify Webhooks, Meta WhatsApp Business API & Transactional Email Automation</p>
       </div>
 
       {statusMsg && (
@@ -35,7 +35,7 @@ export const IntegrationsView = () => {
       )}
 
       {/* Integration Connections Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="glass-panel p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-slate-900 dark:text-white text-sm">Shopify Integration</h3>
@@ -44,20 +44,11 @@ export const IntegrationsView = () => {
           <p className="text-xs text-slate-600 dark:text-slate-400">Webhook HMAC Verification enabled. Auto order ingestion active.</p>
           <button
             onClick={handleSimulateShopify}
-            className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 dark:bg-emerald-600/20 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 font-semibold py-1.5 rounded-xl text-xs flex items-center justify-center space-x-1.5"
+            className="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 dark:bg-emerald-600/20 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 font-semibold py-1.5 rounded-xl text-xs flex items-center justify-center space-x-1.5 cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Simulate Webhook Order</span>
           </button>
-        </div>
-
-        <div className="glass-panel p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-slate-900 dark:text-white text-sm">Zoho Books API</h3>
-            <span className="badge-status status-delivered">CONNECTED ✓</span>
-          </div>
-          <p className="text-xs text-slate-600 dark:text-slate-400">OAuth 2.0 connected. Syncing Sales Orders & Invoices (INV-XXXXX).</p>
-          <div className="text-[11px] text-slate-500 font-mono">Org ID: ZOHO-ORG-88910</div>
         </div>
 
         <div className="glass-panel p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3 shadow-sm">
@@ -75,7 +66,7 @@ export const IntegrationsView = () => {
             <span className="badge-status status-delivered">CONNECTED ✓</span>
           </div>
           <p className="text-xs text-slate-600 dark:text-slate-400">SMTP Queue active. Order updates & AWB details delivered.</p>
-          <div className="text-[11px] text-slate-500 font-mono">Host: smtp.srkinnovation.com</div>
+          <div className="text-[11px] text-slate-500 font-mono">Host: smtp.srkinnovations.com</div>
         </div>
       </div>
 

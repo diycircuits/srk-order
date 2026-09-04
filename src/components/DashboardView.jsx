@@ -82,54 +82,8 @@ export const DashboardView = () => {
       </div>
 
       {/* KPI Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         
-        {/* Sales Dashboard Card */}
-        <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-500/15 flex items-center justify-center text-blue-600 dark:text-blue-400">
-                  <TrendingUp className="w-4.5 h-4.5" />
-                </div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-200 text-sm">Sales Pipeline</h3>
-              </div>
-              <button 
-                onClick={() => { setActiveTab('crm'); setActiveSubTab('leads'); }}
-                className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center"
-              >
-                View leads <ChevronRight className="w-3 h-3 ml-0.5" />
-              </button>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3 mb-2">
-              <div className="bg-slate-50 dark:bg-slate-800/40 rounded-xl p-3 border border-slate-200 dark:border-slate-800">
-                <span className="text-[11px] font-bold text-slate-500 block">Total Leads</span>
-                <span className="text-xl font-extrabold text-slate-900 dark:text-white">{totalLeads}</span>
-                <span className="text-[10px] text-slate-400 block mt-0.5">All leads</span>
-              </div>
-              <div className="bg-slate-50 dark:bg-slate-800/40 rounded-xl p-3 border border-slate-200 dark:border-slate-800">
-                <span className="text-[11px] font-bold text-slate-500 block">Open Leads</span>
-                <span className="text-xl font-extrabold text-blue-600 dark:text-blue-400">{openLeads}</span>
-                <span className="text-[10px] text-slate-400 block mt-0.5">In pipeline</span>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-slate-50 dark:bg-slate-800/40 rounded-xl p-3 border border-slate-200 dark:border-slate-800">
-                <span className="text-[11px] font-bold text-slate-500 block">Won Leads</span>
-                <span className="text-lg font-extrabold text-emerald-600 dark:text-emerald-400">{wonLeads}</span>
-                <span className="text-[10px] text-slate-400 block mt-0.5">Converted</span>
-              </div>
-              <div className="bg-slate-50 dark:bg-slate-800/40 rounded-xl p-3 border border-slate-200 dark:border-slate-800">
-                <span className="text-[11px] font-bold text-slate-500 block">Lost Leads</span>
-                <span className="text-lg font-extrabold text-rose-600 dark:text-rose-400">{lostLeads}</span>
-                <span className="text-[10px] text-slate-400 block mt-0.5">Closed lost</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Order Dashboard Card */}
         <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
           <div>
@@ -142,7 +96,7 @@ export const DashboardView = () => {
               </div>
               <button 
                 onClick={() => setActiveTab('orders')}
-                className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center"
+                className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center cursor-pointer"
               >
                 View orders <ChevronRight className="w-3 h-3 ml-0.5" />
               </button>
@@ -176,52 +130,6 @@ export const DashboardView = () => {
           </div>
         </div>
 
-        {/* Financial Dashboard Card */}
-        <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-500/15 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
-                  <IndianRupee className="w-4.5 h-4.5" />
-                </div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-200 text-sm">Zoho Financials</h3>
-              </div>
-              <button 
-                onClick={() => { setActiveTab('catalog'); setActiveSubTab('invoices'); }}
-                className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center"
-              >
-                View invoices <ChevronRight className="w-3 h-3 ml-0.5" />
-              </button>
-            </div>
-
-            <div className="space-y-2.5">
-              <div className="bg-slate-50 dark:bg-slate-800/40 rounded-xl p-2.5 px-3.5 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <div>
-                  <span className="text-xs text-slate-700 dark:text-slate-300 font-semibold block">Pending Payments</span>
-                  <span className="text-[10px] text-slate-400">{outstandingOrders.length} orders balance due</span>
-                </div>
-                <span className="text-base font-extrabold text-rose-600 dark:text-rose-400">₹{(pendingPaymentsTotal || 0).toFixed(2)}</span>
-              </div>
-
-              <div className="bg-slate-50 dark:bg-slate-800/40 rounded-xl p-2.5 px-3.5 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <div>
-                  <span className="text-xs text-slate-700 dark:text-slate-300 font-semibold block">Received Payments</span>
-                  <span className="text-[10px] text-slate-400">All time collected</span>
-                </div>
-                <span className="text-base font-extrabold text-emerald-600 dark:text-emerald-400">₹{(receivedPaymentsTotal || 0).toFixed(2)}</span>
-              </div>
-
-              <div className="bg-slate-50 dark:bg-slate-800/40 rounded-xl p-2.5 px-3.5 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <div>
-                  <span className="text-xs text-slate-700 dark:text-slate-300 font-semibold block">Monthly Revenue</span>
-                  <span className="text-[10px] text-slate-400">August 2026</span>
-                </div>
-                <span className="text-base font-extrabold text-slate-900 dark:text-white">₹{(monthlyRevenueTotal || 0).toFixed(2)}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Inventory Dashboard Card */}
         <div className="glass-panel rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
           <div>
@@ -234,7 +142,7 @@ export const DashboardView = () => {
               </div>
               <button 
                 onClick={() => { setActiveTab('inventory'); setActiveSubTab('matrix'); }}
-                className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center"
+                className="text-xs text-blue-600 dark:text-blue-400 font-bold hover:underline flex items-center cursor-pointer"
               >
                 View matrix <ChevronRight className="w-3 h-3 ml-0.5" />
               </button>
@@ -270,7 +178,7 @@ export const DashboardView = () => {
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="font-extrabold text-slate-900 dark:text-white text-base">Outstanding Payments</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">Zoho Books pending balance due</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Order balances pending collection</p>
             </div>
             <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200">
               ₹{(pendingPaymentsTotal || 0).toFixed(2)} Due

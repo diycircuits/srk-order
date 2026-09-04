@@ -176,7 +176,6 @@ export const Header = () => {
               <option value="Warehouse Manager" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Warehouse Manager</option>
               <option value="Dispatch Manager" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Dispatch Manager</option>
               <option value="Accounts Team" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Accounts Team</option>
-              <option value="Service & RMA" className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Service & RMA</option>
             </select>
           </div>
 
@@ -219,19 +218,6 @@ export const Header = () => {
           >
             <Plus className="w-4 h-4" />
             <span className="font-semibold">Book Order</span>
-          </button>
-
-          {/* SLA Delay Notification Bell */}
-          <button 
-            onClick={() => setActiveTab('notifications')}
-            className="relative p-2 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 transition-colors cursor-pointer"
-          >
-            <Bell className="w-4 h-4" />
-            {delayedOrdersCount > 0 && (
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center animate-pulse">
-                {delayedOrdersCount}
-              </span>
-            )}
           </button>
 
           {/* User Profile Avatar */}

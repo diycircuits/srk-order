@@ -12,14 +12,9 @@ import { InventoryLocationModule } from './components/InventoryLocationModule';
 import { FulfillmentModule } from './components/FulfillmentModule';
 import { CrmView } from './components/CrmView';
 import { CatalogView } from './components/CatalogView';
-import { ServiceRmaModule } from './components/ServiceRmaModule';
 import { IntegrationsView } from './components/IntegrationsView';
-import { NotificationCenter } from './components/NotificationCenter';
-import { ReportsView } from './components/ReportsView';
 import { AdminView } from './components/AdminView';
 import { PublicTrackingPortal } from './components/PublicTrackingPortal';
-import { HrModule } from './components/HrModule';
-import { CollaborationModule } from './components/CollaborationModule';
 
 import { OrderTrackingModal } from './components/OrderTrackingModal';
 import { OrderDetailsView } from './components/OrderDetailsView';
@@ -28,8 +23,6 @@ import { InvoiceModal } from './components/InvoiceModal';
 import { AddCustomerModal } from './components/AddCustomerModal';
 import { AddProductModal } from './components/AddProductModal';
 import { AddVendorModal } from './components/AddVendorModal';
-import { AddRmaModal } from './components/AddRmaModal';
-import { AddLeadModal } from './components/AddLeadModal';
 import { AddUserModal } from './components/AddUserModal';
 
 const MainLayout = () => {
@@ -40,7 +33,7 @@ const MainLayout = () => {
     return (
       <div className="min-h-screen bg-slate-950 text-white flex items-center justify-center font-sans">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <div className="w-10 h-10 border-4 border-[#0062bd] border-t-transparent rounded-full animate-spin mx-auto"></div>
           <p className="text-xs font-bold text-slate-400">Loading SRK Innovations ERP...</p>
         </div>
       </div>
@@ -65,15 +58,9 @@ const MainLayout = () => {
           {activeTab === 'orders' && <OrdersView />}
           {activeTab === 'inventory' && <InventoryLocationModule />}
           {activeTab === 'transfers' && <InventoryLocationModule />}
-          {activeTab === 'fulfillment' && <FulfillmentModule />}
           {activeTab === 'dispatch' && <FulfillmentModule />}
           {activeTab === 'crm' && <CrmView />}
           {activeTab === 'catalog' && <CatalogView />}
-          {activeTab === 'hr' && <HrModule />}
-          {activeTab === 'collaboration' && <CollaborationModule />}
-          {activeTab === 'service' && <ServiceRmaModule />}
-          {activeTab === 'reports' && <ReportsView />}
-          {activeTab === 'notifications' && <NotificationCenter />}
           {activeTab === 'integrations' && <IntegrationsView />}
           {activeTab === 'admin' && <AdminView />}
           {activeTab === 'public-track' && <PublicTrackingPortal />}
@@ -88,8 +75,6 @@ const MainLayout = () => {
       <AddCustomerModal />
       <AddProductModal />
       <AddVendorModal />
-      <AddRmaModal />
-      <AddLeadModal />
       <AddUserModal />
     </div>
   );

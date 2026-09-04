@@ -38,31 +38,9 @@ export const Sidebar = () => {
       ] 
     },
     { id: 'transfers', label: 'Inter-Office Transfers', icon: Send },
-    { id: 'fulfillment', label: 'Packing, QC & RFID Scan', icon: PackageCheck },
     { id: 'dispatch', label: 'Dispatch & Couriers', icon: Truck },
-    { 
-      id: 'crm', 
-      label: 'CRM', 
-      icon: Users,
-      submodules: [
-        { id: 'customers', label: 'Customers' },
-        { id: 'leads', label: 'Leads Pipeline' }
-      ] 
-    },
-    { 
-      id: 'catalog', 
-      label: 'Catalog & Zoho Books', 
-      icon: BookOpen,
-      submodules: [
-        { id: 'products', label: 'Products & SKUs' },
-        { id: 'invoices', label: 'Zoho Invoices' }
-      ] 
-    },
-    { id: 'hr', label: 'Human Resources (HR)', icon: UserCheck },
-    { id: 'collaboration', label: 'Collaboration & Agenda', icon: Calendar },
-    { id: 'service', label: 'Service & RMA', icon: Wrench },
-    { id: 'reports', label: 'Reports & Analytics', icon: BarChart3 },
-    { id: 'notifications', label: 'Internal Alerts', icon: Bell, badge: delayedOrdersCount > 0 ? String(delayedOrdersCount) : null },
+    { id: 'crm', label: 'Customers Master', icon: Users },
+    { id: 'catalog', label: 'Product Catalog & SKUs', icon: BookOpen },
     { id: 'integrations', label: 'Integrations & Config', icon: Sliders }
   ];
 
