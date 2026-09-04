@@ -51,7 +51,7 @@ export const InvoiceModal = () => {
               </div>
             </div>
             <div className="text-right">
-              <h2 className="text-lg font-extrabold text-red-600 uppercase">TAX INVOICE</h2>
+              <h2 className="text-lg font-extrabold text-[#0062bd] uppercase">TAX INVOICE</h2>
               <span className="font-mono font-bold text-slate-900 text-sm block">{ord.zohoInvoiceRef?.invoiceNumber || 'INV-2026-8891'}</span>
               <span className="text-slate-500">Date: {ord.createdDate}</span>
             </div>
